@@ -65,14 +65,25 @@
 
       <div class="col-lg-9">
 
-        <div class="card mt-4">
-          <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-          <div class="card-body">
-            <h3 class="card-title">{{item.title}}</h3>
-            <h4>{{item.price}}</h4>
-            <p class="card-text">{{item.descript}}</p>
-            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-            {{item.rating}}
+        <div class="card-body">
+              {% for item in comments%}
+            <p>{{item.text}}</p>
+            <small class="text-muted">Posted by {{item.author.name}} on {{item.date}}</small>
+            <hr>
+              {% endfor %}
+
+              {% if form %}
+                    <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <p>
+                    {{form.text.label}}
+                    {{form.text(class="form-control", type="input")}}
+                    </p>
+                    {{ form.submit(type="submit", class="btn btn-primary") }}
+                    </form>
+              {%else %}
+              <p>Зарегистрируйтесь чтобы оставлять комметарии</p>
+              {% endif %}
           </div>
         </div>
         <!-- /.card -->
